@@ -10,6 +10,7 @@ class Settings:
     admin_id: int
     deepseek_api: str
     db_path: str
+    default_limit: int
 
     @classmethod
     def from_env(cls) -> "Settings":
@@ -17,7 +18,8 @@ class Settings:
             bot_token=os.environ["BOT_TOKEN"],
             admin_id=int(os.environ["ADMIN_ID"]),
             deepseek_api=os.environ["DEEPSEEK_API_KEY"],
-            db_path=os.environ["DB_PATH"]
+            db_path=os.environ["DB_PATH"],
+            default_limit=int(os.environ["DEFAULT_LIMIT"])
         )
 settings = Settings.from_env()
 
