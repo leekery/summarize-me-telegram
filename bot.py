@@ -7,20 +7,18 @@ from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
+from aiogram import Router
 
 from config import settings
+from bot.handlers import start
 
 TOKEN = settings.bot_token
 
 dp = Dispatcher()
 
-@dp.message(CommandStart())
-async def command_start_handler(message: Message) -> None:
-    user_name = message.from_user.full_name if message.from_user else "Anonymous"
-    await message.answer(f"Hello, {html.bold(user_name)}!") 
-
 async def main() -> None:
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    dp.include_routers(start.router)
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
