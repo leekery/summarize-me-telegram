@@ -10,15 +10,15 @@ from aiogram.types import Message
 from aiogram import Router
 
 from config import settings
-from bot.handlers import start
-
-TOKEN = settings.bot_token
-
-dp = Dispatcher()
+from bot.handlers import common
 
 async def main() -> None:
+    TOKEN = settings.bot_token
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
-    dp.include_routers(start.router)
+
+    dp = Dispatcher()
+    dp.include_routers(common.router)
+
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
