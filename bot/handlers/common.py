@@ -15,3 +15,8 @@ async def command_start_handler(message: Message) -> None:
 @router.message(Command("help"))
 async def command_help_handler(message: Message) -> None:
     await message.answer("/help commands here")
+
+# Any Text
+@router.message()
+async def text_handler(message: Message) -> None:
+    await message.reply(f"Your message: {message.text}")
