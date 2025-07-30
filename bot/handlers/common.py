@@ -20,3 +20,4 @@ async def command_help_handler(message: Message) -> None:
 @router.message()
 async def text_handler(message: Message) -> None:
     await message.reply(f"Your message: {message.text}")
+#TODO Add message collector for group chats with database storage
