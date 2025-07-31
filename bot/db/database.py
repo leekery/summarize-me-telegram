@@ -25,7 +25,7 @@ def init_db() -> None:
         CREATE TABLE IF NOT EXISTS chats (
             chat_id      INTEGER PRIMARY KEY,
             title        TEXT,
-            is_enabled   BOOLEAN DEFAULT 1,
+            is_enabled   BOOLEAN DEFAULT 0,
             added_at     DATETIME DEFAULT CURRENT_TIMESTAMP,
             last_summary DATETIME
         );
@@ -34,7 +34,7 @@ def init_db() -> None:
             id        INTEGER PRIMARY KEY AUTOINCREMENT,
             chat_id   INTEGER NOT NULL,
             keyword   TEXT NOT NULL,
-            is_active BOOLEAN DEFAULT 1,
+            is_active BOOLEAN DEFAULT 0,
             FOREIGN KEY (chat_id) REFERENCES chats(chat_id) ON DELETE CASCADE
         );
 
