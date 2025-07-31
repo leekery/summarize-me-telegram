@@ -17,9 +17,9 @@ async def command_help_handler(message: Message) -> None:
     await message.answer("/help commands here")
 
 # Any Text in bot
-@router.message()
-async def text_handler(message: Message) -> None:
-    await message.reply(f"Your message: {message.text}")
+# @router.message()
+# async def text_handler(message: Message) -> None:
+#     await message.reply(f"Your message: {message.text}")
 
 # @router.message(F.chat.type.in_({"group"}))
 # async def collect_messages(message: Message) -> None:
