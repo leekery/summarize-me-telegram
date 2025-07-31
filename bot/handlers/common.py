@@ -1,4 +1,4 @@
-from aiogram import Router
+from aiogram import Router, F
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message
 from aiogram import html
@@ -16,8 +16,10 @@ async def command_start_handler(message: Message) -> None:
 async def command_help_handler(message: Message) -> None:
     await message.answer("/help commands here")
 
-# Any Text
+# Any Text in bot
 @router.message()
 async def text_handler(message: Message) -> None:
     await message.reply(f"Your message: {message.text}")
-#TODO Add message collector for group chats with database storage
+
+# @router.message(F.chat.type.in_({"group"}))
+# async def collect_messages(message: Message) -> None:

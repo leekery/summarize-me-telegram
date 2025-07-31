@@ -11,10 +11,13 @@ from aiogram import Router
 
 from config import settings
 from bot.handlers import common
+from bot.db.database import init_db
 
 async def main() -> None:
     TOKEN = settings.bot_token
     bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+
+    init_db()
 
     dp = Dispatcher()
     dp.include_routers(common.router)
