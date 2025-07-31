@@ -11,7 +11,7 @@ from aiogram import Router
 
 from config import settings
 from bot.handlers import common
-from bot.services import summary
+from bot.services import summarizer
 from bot.db.database import init_db
 
 async def main() -> None:
@@ -22,7 +22,7 @@ async def main() -> None:
 
     dp = Dispatcher()
     dp.include_routers(common.router)
-    dp.include_routers(summary.router)
+    dp.include_routers(summarizer.router)
 
     await dp.start_polling(bot)
 
