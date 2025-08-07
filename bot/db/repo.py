@@ -22,3 +22,24 @@ class MessageRepo:
                 {"user_name": row["user_name"], "text": row["text"], "timestamp": row["timestamp"]}
                 for row in cursor.fetchall()
             ]
+
+"""
+# Example usage
+
+repo = MessageRepo()
+
+# Save a message
+await repo.save_message(
+    chat_id=123456,
+    user_id=7890,
+    user_name="some_user",
+    text="Hello, world!",
+    timestamp="2025-08-07 15:30:00"
+)
+
+# Get last 10 unused messages from the chat
+messages = await repo.get_last_messages(chat_id=123456, limit=10)
+
+for msg in messages:
+    print(f"{msg['timestamp']} — {msg['user_name']}: {msg['text']}")
+"""
