@@ -9,6 +9,11 @@ repo = MessageRepo()
 # слушаются только группы/супергруппы и только текст, исключая команды
 @router.message(F.chat.type.in_({"group", "supergroup"}))
 async def collect_messages(message: Message):
+    # Игнорируем команды (включая медиа с подписью-командой)
+    if message.text and message.text.startswith("/"):
+        return
+    if message.caption and message.caption.startswith("/"):
+        return
     chat_id = message.chat.id
     title = message.chat.title or "Без названия"
 
