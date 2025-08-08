@@ -31,6 +31,20 @@ class MessageRepo:
                 for row in cursor.fetchall()
             ]
 
+    async def get_recent_messages(self, chat_id: int, limit: int = 50) -> List[dict]:
+        """Берёт последние сообщения без фильтрации по is_used."""
+        with get_connection() as conn:
+            cursor = conn.execute("""
+                SELECT user_name, text, timestamp
+                FROM messages
+                WHERE chat_id = ?
+                ORDER BY timestamp ASC
+                LIMIT ?
+            """, (chat_id, limit))
+            return [
+                {"user_name": row["user_name"], "text": row["text"], "timestamp": row["timestamp"]}
+                for row in cursor.fetchall()
+            ]
 """
 # Example usage
 
