@@ -10,7 +10,7 @@ from aiogram.types import Message
 from aiogram import Router
 
 from config import settings
-from bot.handlers import common, collector, admin, summary
+from bot.handlers import common, collector, admin, summary, ask
 from bot.db.database import init_db
 
 async def main() -> None:
@@ -20,7 +20,7 @@ async def main() -> None:
     init_db()
 
     dp = Dispatcher()
-    dp.include_routers(common.router, admin.router, collector.router, summary.router)
+    dp.include_routers(common.router, admin.router, collector.router, summary.router, ask.router)
 
     await dp.start_polling(bot)
 
