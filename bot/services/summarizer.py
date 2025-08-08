@@ -41,10 +41,10 @@ async def summarize_messages(msgs: List[Dict]) -> str:
         return content.strip() if content is not None else ""
 
     except Exception as e:
-        return f"(Ошибка подключения к DeepSeek, показана заглушка)\n{_fallback_summary(msgs)}\n\n{e}"
+        return f"(Ошибка подключения)\n{_fallback_summary(msgs)}\n\n{e}"
 
 def _fallback_summary(msgs: List[Dict]) -> str:
     """Простейшая заглушка — последние 10 сообщений."""
     lines = [f"{m['user_name']}: {m['text']}" for m in msgs]
     summary = "\n".join(lines[-10:])
-    return "📝 Краткая сводка (заглушка):\n" + summary
+    return "📝 (заглушка):\n" + summary
