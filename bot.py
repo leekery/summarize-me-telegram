@@ -20,7 +20,7 @@ async def main() -> None:
     init_db()
 
     dp = Dispatcher()
-    dp.include_routers(common.router, admin.router, collector.router, summary.router, ask.router)
+    dp.include_routers(common.router, admin.router, summary.router, ask.router ,collector.router)
 
     await dp.start_polling(bot)
 
