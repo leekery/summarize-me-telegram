@@ -4,6 +4,13 @@ from typing import List
 class MessageRepo: 
     async def save_message(self, chat_id, user_id, user_name, text, timestamp):
         with get_connection() as conn:
+            # Гарантируем, что чат есть в таблице chats
+            conn.execute(
+                "INSERT OR IGNORE INTO chats (chat_id, title) VALUES (?, ?)",
+                (chat_id, user_name if user_name else "Без названия")
+            )
+
+            # Сохраняем сообщение
             conn.execute("""
                 INSERT INTO messages (chat_id, user_id, user_name, text, timestamp)
                 VALUES (?, ?, ?, ?, ?)
@@ -16,6 +23,7 @@ class MessageRepo:
                 SELECT user_name, text, timestamp
                 FROM messages
                 WHERE chat_id = ? AND is_used = 0
+                ORDER BY timestamp ASC
                 LIMIT ?
             """, (chat_id, limit))
             return [
